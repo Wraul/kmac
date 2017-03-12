@@ -2,42 +2,42 @@ KMAC keyboard firmware
 ======================
 Korean custom keyboard designed by Byungho Kim and KBDMania community.
 
-*Note that this is not the official firmware*
+**Note that this is not the official firmware**
 
 Supported models
 ----------------
-At the moment only the TKL models is supported.
-
+At the moment only the TKL models are supported.
 
 Build
 -----
-Move to this directory then just run `make` like:
+[tmk_core](https://github.com/tmk/tmk_core) is included as a submodule. To be
+able to build it must first initialized and updated:
 
-    $ make [winkey|winkeyless]
+    $ git submodule update --init
 
-Use `make -f Makefile.pjrc` if you want to use PJRC stack.
+Then simply run `make` like:
 
-
-Bootloader
----------
-The PCB is hardwired to run the bootloader if the key at the `Caps Lock` position is held down when connecting the keyboard.
-
-It is still possible to use Boot Magic and Command to access the bootloader though.
-
+    $ make
 
 Keymap
 ------
-There are 2 different types of PCB.
-They each have their own keymap file.
+There are 2 different types of PCB, winkey and winkeyless. A default keymap file
+are included for each of these.
 
-To customize a keymap:
-    1. Edit the file that corresponds to your PCB.
-    2. Specify your layout when building.
+To define your own keymap create a file named `keymap_<name>.c`. See [keymap
+documentation](https://github.com/tmk/tmk_core/blob/master/doc/keymap.md) in the
+[tmk_core repository](https://github.com/tmk/tmk_core) and existent keymap files
+for instructions.
+
+To build a firmware binary hex file with a certain keymap run make with `KEYMAP`
+option like:
+
+    $ make KEYMAP=[winkey|winkeyless|<name>]
 
 ### 1. Winkey
 This is the default keymap.
 
-See [keymap_winkey.h](keymap_winkey.h) for detail.
+See [keymap_winkey.c](keymap_winkey.c) for details.
 
 #### 1.0. Winkey Default Layer
      ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
@@ -75,7 +75,7 @@ See [keymap_winkey.h](keymap_winkey.h) for detail.
 ### 2. Winkeyless
 Layout with 1.5 unit modifiers.
 
-See [keymap_winkeyless.h](keymap_winkeyless.h) for detail.
+See [keymap_winkeyless.c](keymap_winkeyless.c) for details.
 
 #### 2.0. Winkeyless Default Layer
      ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
@@ -108,3 +108,11 @@ See [keymap_winkeyless.h](keymap_winkeyless.h) for detail.
      |-----------------------------------------------------------| ,-----------.
      |    |   |    |                               |    |   |    | |   |   |   |
      `-----------------------------------------------------------' `-----------'
+
+Bootloader
+---------
+The PCB is hardwired to run the bootloader if the key at the `Caps Lock`
+position is held down when connecting the keyboard.
+
+It is still possible to use Boot Magic and Command to access the bootloader
+though.
