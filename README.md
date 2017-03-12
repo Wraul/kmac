@@ -13,9 +13,9 @@ Build
 -----
 Move to this directory then just run `make` like:
 
-    $ make -f Makefile.[pjrc|lufa] [winkey|winkeyless]
+    $ make [winkey|winkeyless]
 
-Use `Makefile.pjrc` if you want to use PJRC stack or use `Makefile.lufa` for LUFA stack.
+Use `make -f Makefile.pjrc` if you want to use PJRC stack.
 
 
 Bootloader
